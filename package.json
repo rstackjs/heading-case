@@ -1,6 +1,6 @@
 {
   "name": "heading-case",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "repository": "https://github.com/rspack-contrib/heading-case",
   "license": "MIT",
   "type": "module",
