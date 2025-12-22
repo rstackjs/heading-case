@@ -59,6 +59,7 @@ export const dict = [
   'Service Worker',
   'TanStack Router',
   'Vite',
+  'Vitest',
   'Vue',
   'Web Workers',
   'Xcode',
