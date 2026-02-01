@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@rslib/core": "^0.18.2",
-    "@types/node": "^22.19.1",
+    "@rslib/core": "^0.19.4",
+    "@types/node": "^22.19.7",
     "case-police": "^2.1.1",
     "picocolors": "^1.1.1",
     "rslog": "^1.3.2",
@@ -39,7 +39,7 @@
     "tinyglobby": "^0.2.15",
     "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.28.2",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
