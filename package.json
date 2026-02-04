@@ -1,7 +1,7 @@
 {
   "name": "heading-case",
   "version": "1.0.5",
-  "repository": "https://github.com/rspack-contrib/heading-case",
+  "repository": "https://github.com/rstackjs/heading-case",
   "license": "MIT",
   "type": "module",
   "exports": {
