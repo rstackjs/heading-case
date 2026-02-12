@@ -14,6 +14,8 @@ export const dict = [
   ...Object.values(softwares),
   'Angular',
   'Agent Skills',
+  // For api-extractor
+  'API Report File',
   'App Router',
   'Create React App',
   'Cloudflare Pages',
