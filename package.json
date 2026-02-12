@@ -1,6 +1,6 @@
 {
   "name": "heading-case",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "repository": "https://github.com/rstackjs/heading-case",
   "license": "MIT",
   "type": "module",
