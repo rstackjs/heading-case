@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
+import { normalize } from 'pathe';
 import { formatLine, globMarkdownFiles } from '../dist/index.js';
 
 test('should format line as expected', () => {
@@ -56,5 +57,31 @@ test('should skip markdown files inside gitignored doc_build directories', async
 
   const files = await globMarkdownFiles(cwd);
 
-  assert.deepStrictEqual(files, [path.join(cwd, 'docs', 'guide.md')]);
+  assert.deepStrictEqual(
+    files.map(normalize),
+    [path.join(cwd, 'docs', 'guide.md')].map(normalize),
+  );
+});
+
+test('should skip gitignored directories with non-ascii names', async () => {
+  const cwd = await fs.mkdtemp(path.join(os.tmpdir(), 'heading-case-'));
+
+  await fs.mkdir(path.join(cwd, 'docs'));
+  await fs.mkdir(path.join(cwd, '文档构建'));
+  await fs.writeFile(path.join(cwd, '.gitignore'), '文档构建/\n');
+  await fs.writeFile(path.join(cwd, 'docs', 'guide.md'), '# Hello World\n');
+  await fs.writeFile(path.join(cwd, '文档构建', '草稿.md'), '# Hidden Title\n');
+
+  execFileSync('git', ['init'], { cwd, stdio: 'ignore' });
+  execFileSync('git', ['config', 'core.quotePath', 'true'], {
+    cwd,
+    stdio: 'ignore',
+  });
+
+  const files = await globMarkdownFiles(cwd);
+
+  assert.deepStrictEqual(
+    files.map(normalize),
+    [path.join(cwd, 'docs', 'guide.md')].map(normalize),
+  );
 });

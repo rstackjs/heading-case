@@ -27,6 +27,7 @@ function getGitIgnorePatterns(cwd: string) {
         '--ignored',
         '--exclude-standard',
         '--directory',
+        '-z',
       ],
       {
         cwd,
@@ -36,7 +37,7 @@ function getGitIgnorePatterns(cwd: string) {
     );
 
     return stdout
-      .split('\n')
+      .split('\0')
       .filter(Boolean)
       .map((path) => escapePath(path));
   } catch {
