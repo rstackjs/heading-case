@@ -1,13 +1,53 @@
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import color from 'picocolors';
 import { logger } from 'rslog';
-import { glob } from 'tinyglobby';
+import { escapePath, glob } from 'tinyglobby';
 import { dict } from './dict.js';
+
+const DEFAULT_IGNORE = [
+  '**/node_modules',
+  '**/dist',
+  '**/.git',
+  '**/.cache',
+  '**/temp',
+];
+
+/**
+ * Ask Git for ignored paths so scans follow `.gitignore`, `.git/info/exclude`,
+ * and the user's global ignore rules when available.
+ */
+function getGitIgnorePatterns(cwd: string) {
+  try {
+    const stdout = execFileSync(
+      'git',
+      [
+        'ls-files',
+        '--others',
+        '--ignored',
+        '--exclude-standard',
+        '--directory',
+      ],
+      {
+        cwd,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'ignore'],
+      },
+    );
+
+    return stdout
+      .split('\n')
+      .filter(Boolean)
+      .map((path) => escapePath(path));
+  } catch {
+    return [];
+  }
+}
 
 export async function globMarkdownFiles(cwd: string) {
   return glob(['**/*.md', '**/*.mdx'], {
     cwd,
-    ignore: ['**/node_modules', '**/dist', '**/.git', '**/.cache', '**/temp'],
+    ignore: [...DEFAULT_IGNORE, ...getGitIgnorePatterns(cwd)],
     absolute: true,
   });
 }

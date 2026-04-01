@@ -44,6 +44,8 @@ Check all markdown and MDX files in the current directory:
 npx heading-case
 ```
 
+By default, files ignored by Git are skipped as well, including rules from `.gitignore`, `.git/info/exclude`, and global Git ignore files.
+
 Check and write the formatted content to the file:
 
 ```bash
