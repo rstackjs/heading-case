@@ -10,13 +10,13 @@ importers:
     devDependencies:
       '@rslib/core':
         specifier: ^0.21.5
-        version: 0.21.5(core-js@3.47.0)(typescript@6.0.3)
+        version: 0.21.5(typescript@6.0.3)
       '@rslint/core':
         specifier: ^0.5.3
         version: 0.5.3
       '@rstest/core':
         specifier: ^0.10.0
-        version: 0.10.0(core-js@3.47.0)
+        version: 0.10.0
       '@types/node':
         specifier: ^24.12.4
         version: 24.12.4
@@ -44,8 +44,6 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
-
-  playground: {}
 
 packages:
 
@@ -292,9 +290,6 @@ packages:
     resolution: {integrity: sha512-EZlL1YgE36hPbgkbSh32RvfITFE1K/z6K6DHlLLUDq/QctI/jON/pTTIS4C4eqyaVn5pvG118HanhEFry420Ow==}
     hasBin: true
 
-  core-js@3.47.0:
-    resolution: {integrity: sha512-c3Q2VVkGAUyupsjRnaNX6u8Dq2vAdzm9iuPj5FW0fRxzlxgq9Q39MDq10IvmQSpLgHQNyQzQmOo6bgGHmH3NNg==}
-
   fdir@6.5.0:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
     engines: {node: '>=12.0.0'}
@@ -426,19 +421,17 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@rsbuild/core@2.0.6(core-js@3.47.0)':
+  '@rsbuild/core@2.0.6':
     dependencies:
       '@rspack/core': 2.0.3(@swc/helpers@0.5.21)
       '@swc/helpers': 0.5.21
-    optionalDependencies:
-      core-js: 3.47.0
     transitivePeerDependencies:
       - '@module-federation/runtime-tools'
 
-  '@rslib/core@0.21.5(core-js@3.47.0)(typescript@6.0.3)':
+  '@rslib/core@0.21.5(typescript@6.0.3)':
     dependencies:
-      '@rsbuild/core': 2.0.6(core-js@3.47.0)
-      rsbuild-plugin-dts: 0.21.5(@rsbuild/core@2.0.6(core-js@3.47.0))(typescript@6.0.3)
+      '@rsbuild/core': 2.0.6
+      rsbuild-plugin-dts: 0.21.5(@rsbuild/core@2.0.6)(typescript@6.0.3)
     optionalDependencies:
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -529,9 +522,9 @@ snapshots:
     optionalDependencies:
       '@swc/helpers': 0.5.21
 
-  '@rstest/core@0.10.0(core-js@3.47.0)':
+  '@rstest/core@0.10.0':
     dependencies:
-      '@rsbuild/core': 2.0.6(core-js@3.47.0)
+      '@rsbuild/core': 2.0.6
       '@types/chai': 5.2.3
     transitivePeerDependencies:
       - '@module-federation/runtime-tools'
@@ -561,9 +554,6 @@ snapshots:
 
   case-police@2.2.1: {}
 
-  core-js@3.47.0:
-    optional: true
-
   fdir@6.5.0(picomatch@4.0.4):
     optionalDependencies:
       picomatch: 4.0.4
@@ -576,10 +566,10 @@ snapshots:
 
   prettier@3.8.3: {}
 
-  rsbuild-plugin-dts@0.21.5(@rsbuild/core@2.0.6(core-js@3.47.0))(typescript@6.0.3):
+  rsbuild-plugin-dts@0.21.5(@rsbuild/core@2.0.6)(typescript@6.0.3):
     dependencies:
       '@ast-grep/napi': 0.37.0
-      '@rsbuild/core': 2.0.6(core-js@3.47.0)
+      '@rsbuild/core': 2.0.6
     optionalDependencies:
       typescript: 6.0.3
 
