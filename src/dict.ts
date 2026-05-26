@@ -15,6 +15,7 @@ export const dict = [
   // For api-extractor
   'API Report File',
   'App Router',
+  'Babel',
   'Create React App',
   'Cloudflare Pages',
   'CSS Modules',
