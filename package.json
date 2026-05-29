@@ -13,7 +13,6 @@
   "bin": {
     "heading-case": "./bin.js"
   },
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
