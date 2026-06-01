@@ -30,20 +30,20 @@
     "pre-commit": "pnpm run lint:write"
   },
   "devDependencies": {
-    "@rslib/core": "^0.21.5",
+    "@rslib/core": "^0.22.0",
     "@rslint/core": "^0.5.3",
-    "@rstest/core": "^0.10.2",
+    "@rstest/core": "^0.10.3",
     "@types/node": "^24.12.4",
     "case-police": "^2.2.1",
     "pathe": "^2.0.3",
     "picocolors": "^1.1.1",
     "prettier": "^3.8.3",
-    "rslog": "^2.1.1",
+    "rslog": "^2.1.2",
     "simple-git-hooks": "^2.13.1",
-    "tinyglobby": "^0.2.16",
+    "tinyglobby": "^0.2.17",
     "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@11.3.0",
+  "packageManager": "pnpm@11.5.0",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
