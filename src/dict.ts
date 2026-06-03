@@ -62,6 +62,7 @@ export const dict = [
   'Server Action',
   'Service Worker',
   'TanStack Router',
+  'TanStack Start',
   'Vite',
   'Vitest',
   'Vue',
