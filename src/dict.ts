@@ -68,6 +68,7 @@ export const dict = [
   'Vue',
   'Web Workers',
   'Xcode',
+  'Yarn',
   'Zeabur',
   'Zephyr',
   'Zephyr Cloud',
