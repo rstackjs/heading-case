@@ -40,6 +40,7 @@ export const dict = [
   'Open Graph',
   'Page Router',
   'Parcel',
+  'Playwright',
   'Preact',
   'Preact Refresh',
   'Relay',
