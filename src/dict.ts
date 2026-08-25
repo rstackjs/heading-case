@@ -19,6 +19,7 @@ export const dict = [
   'Baseline',
   'Create React App',
   'Cloudflare Pages',
+  'Cloudflare Workers',
   'CSS Modules',
   'Coding Agent',
   'Coding Agents',
