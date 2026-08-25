@@ -16,6 +16,7 @@ export const dict = [
   'API Report File',
   'App Router',
   'Babel',
+  'Baseline',
   'Create React App',
   'Cloudflare Pages',
   'CSS Modules',
