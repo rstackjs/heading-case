@@ -40,6 +40,7 @@ export const dict = [
   'Netlify',
   'Kinsta',
   'Open Graph',
+  'Octane',
   'Page Router',
   'Parcel',
   'Playwright',
