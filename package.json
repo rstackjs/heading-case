@@ -18,28 +18,21 @@
     "dist"
   ],
   "scripts": {
-    "build": "rslib",
-    "dev": "rslib -w",
-    "lint": "rslint && prettier -c .",
-    "lint:write": "rslint --fix && prettier -w .",
-    "prepare": "simple-git-hooks",
-    "test": "rstest",
+    "build": "rs lib",
+    "dev": "rs lib -w",
+    "lint": "rs lint && rs fmt --check",
+    "lint:write": "rs lint --fix && rs fmt",
+    "prepare": "rs hooks",
+    "test": "rs test",
     "bump": "npx bumpp"
   },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm run lint:write"
-  },
   "devDependencies": {
-    "@rslib/core": "^0.23.2",
-    "@rslint/core": "^0.8.0",
-    "@rstest/core": "^0.11.8",
     "@types/node": "^24.13.3",
     "case-police": "^2.2.1",
     "pathe": "^2.0.3",
     "picocolors": "^1.1.1",
-    "prettier": "^3.9.6",
     "rslog": "^2.3.0",
-    "simple-git-hooks": "^2.13.1",
+    "rstack": "^0.6.5",
     "tinyglobby": "^0.2.17",
     "typescript": "^7.0.2"
   },
