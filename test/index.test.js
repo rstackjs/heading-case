@@ -3,7 +3,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
-import { test } from '@rstest/core';
+import { test } from 'rstack/test';
 import { normalize } from 'pathe';
 import { formatLine, globMarkdownFiles } from '../dist/index.js';
 
