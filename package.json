@@ -10,21 +10,22 @@
       "import": "./dist/index.js"
     }
   },
+  "types": "./dist/index.d.ts",
   "bin": {
     "heading-case": "./bin.js"
   },
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "build": "rs lib",
+    "bump": "pnpx bumpp",
+    "check": "rs check",
     "dev": "rs lib -w",
-    "lint": "rs lint && rs fmt --check",
-    "lint:write": "rs lint --fix && rs fmt",
+    "format": "rs fmt",
+    "lint": "rs lint",
     "prepare": "rs hooks",
-    "test": "rs test",
-    "bump": "npx bumpp"
+    "test": "rs test"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",

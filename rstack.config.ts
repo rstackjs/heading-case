@@ -14,4 +14,10 @@ define.lint(({ js, ts }) => [js.configs.recommended, ts.configs.recommended]);
 define.fmt({
   singleQuote: true,
   ignorePatterns: ['dist/**'],
+  sortPackageJson: true,
+});
+
+define.staged({
+  '*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}': ['rs lint', 'rs fmt'],
+  '*.{json,md,mdx,css,scss,less,html,yml,yaml}': 'rs fmt',
 });
