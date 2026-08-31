@@ -5,6 +5,13 @@ define.lib({
   format: 'esm',
   syntax: 'es2021',
   dts: true,
+  source: {
+    entry: {
+      cli: './src/cli.ts',
+      core: './src/core.ts',
+      index: './src/index.ts',
+    },
+  },
 });
 
 define.test({});

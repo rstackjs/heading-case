@@ -1,11 +1,13 @@
 import assert from 'node:assert';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import process from 'node:process';
 import { test } from 'rstack/test';
 import { normalize } from 'pathe';
-import { formatLine, globMarkdownFiles } from '../dist/index.js';
+import { globMarkdownFiles } from '../dist/cli.js';
+import { formatLine } from '../dist/core.js';
 
 test('should format line as expected', () => {
   // Basic
@@ -39,6 +41,30 @@ test('should format line as expected', () => {
     formatLine('# 你好 Hello World'),
     '# 你好 Hello world',
   );
+});
+
+test('should preserve the existing CLI check and write usage', async () => {
+  const cwd = await fs.mkdtemp(path.join(os.tmpdir(), 'heading-case-cli-'));
+  const filePath = path.join(cwd, 'guide.md');
+  const binPath = path.resolve(import.meta.dirname, '../bin.js');
+
+  await fs.writeFile(filePath, '# Hello World\n');
+
+  const checkResult = spawnSync(process.execPath, [binPath], {
+    cwd,
+    encoding: 'utf8',
+  });
+
+  assert.strictEqual(checkResult.status, 1, checkResult.stderr);
+  assert.strictEqual(await fs.readFile(filePath, 'utf8'), '# Hello World\n');
+
+  const writeResult = spawnSync(process.execPath, [binPath, '--write'], {
+    cwd,
+    encoding: 'utf8',
+  });
+
+  assert.strictEqual(writeResult.status, 0, writeResult.stderr);
+  assert.strictEqual(await fs.readFile(filePath, 'utf8'), '# Hello world\n');
 });
 
 test('should skip markdown files inside gitignored doc_build directories', async () => {

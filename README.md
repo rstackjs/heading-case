@@ -1,6 +1,8 @@
 # heading-case
 
-Format page titles and section headings in markdown files to use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guide/text-formatting/using-type/use-sentence-style-capitalization).
+Format page titles and section headings in Markdown and MDX files to use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guide/text-formatting/using-type/use-sentence-style-capitalization).
+
+It can be used as a Prettier plugin or as a standalone CLI.
 
 <p>
   <a href="https://npmjs.com/package/heading-case">
@@ -24,12 +26,6 @@ Format page titles and section headings in markdown files to use [sentence-style
 # A new method for creating JavaScript rollovers
 ```
 
-## Limitations
-
-This package is designed for Rspack's documentation. It follows the writing style of Rspack documentation and may not work well for other projects.
-
-There are some edge cases that can not be correctly handled, so the execution result is not completely reliable.
-
 ## Usage
 
 Install:
@@ -38,7 +34,48 @@ Install:
 npm add heading-case -D
 ```
 
-Check all markdown and MDX files in the current directory:
+### Rstack CLI
+
+Add `heading-case` to the [`rs fmt` Prettier plugins](https://rstack.rs/guide/formatting#prettier-plugins):
+
+```ts
+import { define } from 'rstack';
+
+define.fmt({
+  plugins: ['heading-case'],
+});
+```
+
+Check or write formatted files:
+
+```bash
+rs fmt --check
+rs fmt
+```
+
+### Prettier
+
+Add the plugin to your Prettier configuration:
+
+```js
+/** @type {import('prettier').Config} */
+const config = {
+  plugins: ['heading-case'],
+};
+
+export default config;
+```
+
+Then run Prettier normally:
+
+```bash
+prettier . --check
+prettier . --write
+```
+
+### Standalone CLI
+
+The existing CLI remains available. Check all Markdown and MDX files in the current directory:
 
 ```bash
 npx heading-case
@@ -51,6 +88,19 @@ Check and write the formatted content to the file:
 ```bash
 npx heading-case --write
 ```
+
+The programmatic CLI and core formatting utilities are available from subpath exports:
+
+```js
+import { headingCase } from 'heading-case/cli';
+import { formatLine } from 'heading-case/core';
+```
+
+## Limitations
+
+This package is designed for Rstack's documentation. It follows the writing style of Rstack documentation and may not work well for other projects.
+
+There are some edge cases that can not be correctly handled, so the execution result is not completely reliable.
 
 ## License
 
