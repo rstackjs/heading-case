@@ -8,6 +8,14 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.ts",
+      "import": "./dist/cli.js"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js"
     }
   },
   "types": "./dist/index.d.ts",
@@ -32,10 +40,14 @@
     "case-police": "^2.2.1",
     "pathe": "^2.0.3",
     "picocolors": "^1.1.1",
+    "prettier": "^3.9.6",
     "rslog": "^2.3.0",
     "rstack": "^0.6.5",
     "tinyglobby": "^0.2.17",
     "typescript": "^7.0.2"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.0"
   },
   "packageManager": "pnpm@11.21.0",
   "publishConfig": {

@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import { headingCase } from './dist/index.js';
+import { headingCase } from './dist/cli.js';
 
-headingCase();
+await headingCase();
