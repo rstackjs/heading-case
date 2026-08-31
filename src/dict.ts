@@ -66,6 +66,7 @@ export const dict = [
   'Svelte',
   'Server Action',
   'Service Worker',
+  'Shiki',
   'TanStack Router',
   'TanStack Start',
   'Vite',
