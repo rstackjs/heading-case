@@ -36,6 +36,12 @@ test('should format line as expected', () => {
   // Number
   assert.deepStrictEqual(formatLine('# 1. Hello World'), '# 1. Hello world');
 
+  // Prefix
+  assert.deepStrictEqual(
+    formatLine('## [Important] Package name'),
+    '## [Important] Package name',
+  );
+
   // Chinese
   assert.deepStrictEqual(
     formatLine('# 你好 Hello World'),

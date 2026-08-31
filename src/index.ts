@@ -9,6 +9,7 @@ const AST_FORMAT = 'heading-case-mdast';
 
 type MarkdownNode = {
   children?: MarkdownNode[];
+  referenceType?: string;
   type?: string;
   value?: string;
 };
@@ -29,7 +30,20 @@ const collectWordNodes = (node: MarkdownNode, words: MarkdownNode[]) => {
 
 const formatHeading = (heading: MarkdownNode) => {
   const wordNodes: MarkdownNode[] = [];
-  collectWordNodes(heading, wordNodes);
+  const children = heading.children ?? [];
+
+  // A leading `[Label]` can be parsed as a shortcut link reference when the
+  // document contains a matching reference definition. Treat it as a heading
+  // prefix either way, so the word after it remains the first English word.
+  const contentNodes =
+    children[0]?.type === 'linkReference' &&
+    children[0].referenceType === 'shortcut'
+      ? children.slice(1)
+      : children;
+
+  for (const child of contentNodes) {
+    collectWordNodes(child, wordNodes);
+  }
 
   const words: WordMeta[] = wordNodes.map((node) => ({
     type: node.type === 'whitespace' ? 'space' : 'word',

@@ -13,6 +13,8 @@ test('should format Markdown and MDX headings with Prettier', async () => {
     '',
     '# Hello **Bold World** and React Router',
     '',
+    '## [Important] Package name',
+    '',
     'Setext Heading',
     '==============',
     '',
@@ -28,6 +30,8 @@ test('should format Markdown and MDX headings with Prettier', async () => {
     '# Hello world',
     '',
     '# Hello **bold world** and React Router',
+    '',
+    '## [Important] Package name',
     '',
     'Setext heading',
     '==============',
@@ -64,6 +68,30 @@ test('should format Markdown and MDX headings with Prettier', async () => {
       plugins: [plugin],
     }),
     formattedMarkdown,
+  );
+});
+
+test('should preserve the first word after a bracketed heading prefix', async () => {
+  const markdown = [
+    '## [Important] Package Name',
+    '',
+    '[Important]: https://example.com',
+    '',
+  ].join('\n');
+
+  const expected = [
+    '## [Important] Package name',
+    '',
+    '[Important]: https://example.com',
+    '',
+  ].join('\n');
+
+  assert.strictEqual(
+    await prettier.format(markdown, {
+      parser: 'markdown',
+      plugins: [plugin],
+    }),
+    expected,
   );
 });
 
