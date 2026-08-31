@@ -80,6 +80,7 @@ test('should load the package entry as a Prettier plugin through rs fmt', async 
     spawnSync(rsBin, ['fmt', '--no-cache', ...args], {
       cwd,
       encoding: 'utf8',
+      shell: process.platform === 'win32',
     });
 
   try {
