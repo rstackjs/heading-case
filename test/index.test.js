@@ -49,6 +49,26 @@ test('should format line as expected', () => {
   );
 });
 
+test('should preserve inline code while formatting heading text', () => {
+  const cases = [
+    ['## Use `Foo Bar Baz` Component', '## Use `Foo Bar Baz` component'],
+    [
+      '## Use ``Foo `Bar` Baz`` Component',
+      '## Use ``Foo `Bar` Baz`` component',
+    ],
+    ['## Use `Foo Bar Component', '## Use `Foo bar component'],
+    [
+      '## Use \\`Foo Bar Baz\\` Component',
+      '## Use \\`Foo bar Baz\\` component',
+    ],
+    ['## Use \\``Foo Bar Baz` Component', '## Use \\``Foo Bar Baz` component'],
+  ];
+
+  for (const [input, expected] of cases) {
+    assert.strictEqual(formatLine(input), expected);
+  }
+});
+
 test('should preserve the existing CLI check and write usage', async () => {
   const cwd = await fs.mkdtemp(path.join(os.tmpdir(), 'heading-case-cli-'));
   const filePath = path.join(cwd, 'guide.md');
