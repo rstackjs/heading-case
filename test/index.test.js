@@ -61,6 +61,7 @@ test('should preserve inline code while formatting heading text', () => {
       '## Use \\`Foo Bar Baz\\` Component',
       '## Use \\`Foo bar Baz\\` component',
     ],
+    ['## Use \\``Foo Bar Baz` Component', '## Use \\``Foo Bar Baz` component'],
   ];
 
   for (const [input, expected] of cases) {

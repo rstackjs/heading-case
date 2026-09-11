@@ -17,6 +17,34 @@ const isTerm = (word: string, line: string) => {
   });
 };
 
+const indexCodeSpans = (line: string) => {
+  const spans = new Map<number, number>();
+  const nextEnds = new Map<number, number>();
+
+  // Index the nearest closing run of each length without rescanning the suffix.
+  for (let end = line.length; end > 0;) {
+    if (line[end - 1] !== '`') {
+      end--;
+      continue;
+    }
+    let start = end - 1;
+    while (start > 0 && line[start - 1] === '`') {
+      start--;
+    }
+
+    const length = end - start;
+    spans.set(start, nextEnds.get(length) ?? end);
+    // An escaped first backtick leaves the rest of the run as a possible opener.
+    if (length > 1) {
+      spans.set(start + 1, nextEnds.get(length - 1) ?? end);
+    }
+    nextEnds.set(length, end);
+    end = start;
+  }
+
+  return spans;
+};
+
 const lineToWords = (line: string) => {
   const words: WordMeta[] = [];
 
@@ -25,12 +53,17 @@ const lineToWords = (line: string) => {
     value: '',
   };
 
-  // Consume escapes and code spans before individual characters. Code delimiters
-  // must be complete backtick runs of equal length; unmatched runs stay literal.
-  const tokens =
-    line.match(/\\[\\`]|(`+)(?!`)[\s\S]*?[^`]\1(?!`)|`+|[\s\S]/g) ?? [];
+  const codeSpans = indexCodeSpans(line);
 
-  for (const char of tokens) {
+  for (let index = 0; index < line.length; index++) {
+    let char = line[index];
+    if (char === '\\' && /[\\`]/.test(line[index + 1] ?? '')) {
+      char += line[++index];
+    } else if (char === '`') {
+      const end = codeSpans.get(index)!;
+      char = line.slice(index, end);
+      index = end - 1;
+    }
     if (/^\s$/.test(char)) {
       if (lastWord.type === 'space') {
         lastWord.value += char;
