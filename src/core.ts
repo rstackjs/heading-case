@@ -17,31 +17,6 @@ const isTerm = (word: string, line: string) => {
   });
 };
 
-const findCodeSpanEnd = (line: string, start: number) => {
-  let openingEnd = start + 1;
-  while (line[openingEnd] === '`') {
-    openingEnd++;
-  }
-
-  const delimiterLength = openingEnd - start;
-  let closingStart = line.indexOf('`', openingEnd);
-
-  while (closingStart !== -1) {
-    let closingEnd = closingStart + 1;
-    while (line[closingEnd] === '`') {
-      closingEnd++;
-    }
-
-    if (closingEnd - closingStart === delimiterLength) {
-      return closingEnd;
-    }
-    closingStart = line.indexOf('`', closingEnd);
-  }
-
-  // An unmatched backtick run is literal text, not an inline code span.
-  return openingEnd;
-};
-
 const lineToWords = (line: string) => {
   const words: WordMeta[] = [];
 
@@ -50,18 +25,12 @@ const lineToWords = (line: string) => {
     value: '',
   };
 
-  for (let index = 0; index < line.length; index++) {
-    let char = line[index];
+  // Consume escapes and code spans before individual characters. Code delimiters
+  // must be complete backtick runs of equal length; unmatched runs stay literal.
+  const tokens =
+    line.match(/\\[\\`]|(`+)(?!`)[\s\S]*?[^`]\1(?!`)|`+|[\s\S]/g) ?? [];
 
-    if (char === '\\' && /[\\`]/.test(line[index + 1] ?? '')) {
-      char += line[++index];
-    } else if (char === '`') {
-      // Keep code spans in a single token so their contents are never cased.
-      const end = findCodeSpanEnd(line, index);
-      char = line.slice(index, end);
-      index = end - 1;
-    }
-
+  for (const char of tokens) {
     if (/^\s$/.test(char)) {
       if (lastWord.type === 'space') {
         lastWord.value += char;
