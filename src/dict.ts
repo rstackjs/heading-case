@@ -70,6 +70,7 @@ export const dict = [
   'Rslint',
   'Solid',
   'Svelte',
+  'SWC Next',
   'Server Action',
   'Service Worker',
   'Shiki',
